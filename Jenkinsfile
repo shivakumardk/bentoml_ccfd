@@ -1,24 +1,24 @@
 node {
          stage("Git Clone"){
 
-         git credentialsId: 'Git-Hub-Credentials', url: "https://github.com/RupaliKhare/bentoml_ccfd.git"
+         git credentialsId: 'Git-Hub-Credentials', url: "https://github.com/shivakumardk/bentoml_ccfd.git"
          
          stage("Docker build"){
              sh 'docker version'
              sh 'pip install -r requirements.txt'
              sh 'python3 train.py'
              sh 'bentoml build .'
-             sh 'bentoml containerize xgb_classifier:latest -t rupalikhare123/xgb_classifier:latest'
+             sh 'bentoml containerize xgb_classifier:latest -t shivakumardk/xgb_classifier:latest'
          
          }
          stage("Docker Login"){
                    
-             withCredentials([string(credentialsId: 'rupalikhare123', variable: 'PASSWORD')]) {
-        	    sh "docker login -u rupalikhare123 -p ${PASSWORD}"
+             withCredentials([string(credentialsId: 'dkshivakumar', variable: 'PASSWORD')]) {
+        	    sh "docker login -u dkshivakumar -p ${PASSWORD}"
          }
          }
          stage("Push image to docker hub"){
-             sh 'docker push rupalikhare123/xgb_classifier:latest'
+             sh 'docker push dkshivakumar/xgb_classifier:latest'
          }
 
          stage("Kubernetes deployment"){
