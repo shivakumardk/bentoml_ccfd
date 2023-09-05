@@ -34,7 +34,7 @@ spec:
                 app: xgb-classifier
         spec:
             containers:
-            - image: dkshivakumar/xgb_classifier1:latest
+            - image: dkshivakumar/xgb_classifier:latest
               name: xgb-classifier
               ports:
               - containerPort: 3000
