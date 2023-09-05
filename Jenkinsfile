@@ -8,7 +8,7 @@ node {
              sh 'pip install -r requirements.txt'
              sh 'python3 train.py'
              sh 'bentoml build .'
-             sh 'bentoml containerize xgb_classifier:latest -t shivakumardk/xgb_classifier:latest'
+             sh 'bentoml containerize xgb_classifier1 -t dkshivakumar/xgb_classifier1'
          
          }
          stage("Docker Login"){
@@ -18,7 +18,7 @@ node {
          }
          }
          stage("Push image to docker hub"){
-             sh 'docker push dkshivakumar/xgb_classifier:latest'
+             sh 'docker push dkshivakumar/xgb_classifier1'
          }
 
          stage("Kubernetes deployment"){
